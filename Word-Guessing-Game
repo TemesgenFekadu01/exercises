@@ -1,0 +1,25 @@
+word = "Mississippi"
+guesses = 7
+progress = []
+
+for a in word:
+    progress.append('_')
+
+display = ''.join(progress)
+
+
+while guesses > 0:
+    print('\n' + 'Guesses left: ' + str(guesses))
+    print('Word: ' + display + '\n')
+
+    guess = str(input('Make a guess: '))
+
+    res = [a for a in range(len(word)) if word.startswith(guess, a)]
+
+    for a in res:
+        progress[a] = guess
+
+    display = ''.join(progress)
+    guesses = guesses - 1
+else:
+    print('No guesses left, game over')
