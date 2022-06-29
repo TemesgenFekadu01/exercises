@@ -15,13 +15,19 @@ while guesses > 0:
     print('Word: ' + display + '\n')
 
     guess = str(input('Make a guess: '))
+    
+    if len(guess) == 1:
+        res = [a for a in range(len(word)) if word.startswith(guess, a)]
 
-    res = [a for a in range(len(word)) if word.startswith(guess, a)]
+        for a in res:
+            progress[a] = guess
 
-    for a in res:
-        progress[a] = guess
-
-    display = ''.join(progress)
-    guesses = guesses - 1
+        display = ''.join(progress)
+        guesses = guesses - 1
+    elif guess == word:
+        print('You guessed correctly, you win!')
+        break
+    else:
+        guesses = guesses - 1
 else:
     print('No guesses left, game over')
