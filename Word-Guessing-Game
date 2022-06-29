@@ -1,6 +1,6 @@
 # Still in progress
 
-word = "Mississippi"
+word = "apple"
 guesses = 7
 progress = []
 
@@ -9,25 +9,28 @@ for a in word:
 
 display = ''.join(progress)
 
-
 while guesses > 0:
     print('\n' + 'Guesses left: ' + str(guesses))
     print('Word: ' + display + '\n')
 
-    guess = str(input('Make a guess: '))
-    
-    if len(guess) == 1:
-        res = [a for a in range(len(word)) if word.startswith(guess, a)]
+    if (display == word) is False:
+        guess = str(input('Make a guess: '))
 
-        for a in res:
-            progress[a] = guess
+        if len(guess) == 1:
+            check = [a for a in range(len(word)) if word.startswith(guess, a)]
 
-        display = ''.join(progress)
-        guesses = guesses - 1
-    elif guess == word:
-        print('You guessed correctly, you win!')
-        break
+            for a in check:
+                progress[a] = guess
+
+            display = ''.join(progress)
+            guesses = guesses - 1
+        elif guess == word:
+            print('You guessed correctly, you win!')
+            break
+        else:
+            guesses = guesses - 1
     else:
-        guesses = guesses - 1
+        print('You win!')
+        break
 else:
     print('No guesses left, game over')
