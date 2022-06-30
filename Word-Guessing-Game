@@ -7,11 +7,14 @@ wordlistfile.close()
 allwords = wordlist.split('\n')
 
 playagain = 'yes'
+wins = 0
+losses = 0
 
 while playagain == 'yes':
     word = random.choice(allwords)
     guesses = 7
     progress = []
+    guessedletters = []
 
     for a in word:
         progress.append('_')
@@ -19,33 +22,46 @@ while playagain == 'yes':
     display = ''.join(progress)
 
     while guesses > 0:
-        print('\n' + 'Guesses left: ' + str(guesses))
+        print('\nGuessed letters: ' + str(guessedletters))
+        print('Guesses left: ' + str(guesses))
         print('Word: ' + display + '\n')
 
         if (display == word) is False:
             guess = str(input('Make a guess: '))
 
             if len(guess) == 1:
+                guessedletters.append(guess)
                 check = [a for a in range(len(word)) if word.startswith(guess, a)]
 
                 for a in check:
                     progress[a] = guess
 
-                display = ''.join(progress)
-                guesses = guesses - 1
+                if check == []:
+                    guesses = guesses - 1
+
+                else:
+                    display = ''.join(progress)
+
             elif guess == word:
                 print('You guessed correctly, you win!')
+                wins = wins + 1
                 break
+
             else:
                 guesses = guesses - 1
         else:
             print('You win!')
+            wins = wins + 1
             break
+
     else:
         print('No guesses left, game over')
         print('The word was:' + word + '\n')
+        losses = losses + 1
 
+    print('W: ' + str(wins) + ' L: ' + str(losses))
     print('Play again? \nyes or no')
     playagain = str(input(''))
+
 else:
     print('\nSee you next time!')
