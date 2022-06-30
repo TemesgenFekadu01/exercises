@@ -1,6 +1,12 @@
 # Still in progress
+import random
+wordlistfile = open('wordlist.txt','r')
+wordlist = wordlistfile.read()
+wordlistfile.close()
 
-word = "apple"
+allwords = wordlist.split('\n')
+
+word = random.choice(allwords)
 guesses = 7
 progress = []
 
@@ -34,3 +40,4 @@ while guesses > 0:
         break
 else:
     print('No guesses left, game over')
+    print('The word was:' + word)
