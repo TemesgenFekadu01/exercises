@@ -9,9 +9,14 @@ allwords = wordlist.split('\n')
 playagain = 'yes'
 wins = 0
 losses = 0
+usedwords = []
 
 while playagain == 'yes':
     word = random.choice(allwords)
+    while word in usedwords:
+        word = random.choice(allwords)
+    else:
+        usedwords.append(word)
     guesses = 7
     progress = []
     guessedletters = []
@@ -56,11 +61,12 @@ while playagain == 'yes':
 
     else:
         print('No guesses left, game over')
-        print('The word was:' + word + '\n')
+        print('The word was:' + word)
         losses = losses + 1
 
+    print('\n===========================' + '\n')
     print('W: ' + str(wins) + ' L: ' + str(losses))
-    print('Play again? \nyes or no')
+    print('\nPlay again? \nyes or no')
     playagain = str(input(''))
 
 else:
